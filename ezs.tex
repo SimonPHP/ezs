@@ -62,8 +62,70 @@ periodisches Signal \textcolor{red}{u} alle 200ms
 
 \begin{quote}
     \(t_{Pmin,i} = minimal\) =$>$ \(t_{max,i} = \dfrac{1}{ t_{Pmin,i} }\) \\
-    \(t_{Pmax,i} = maximal\) \textcolor{gray}{$<$= uninteressant}    
+	\(t_{Pmax,i} = maximal\) \textcolor{gray}{$<$= uninteressant} \\
+	\(t_{Dmin,i}\) = minimal zulässige Reaktionszeit \\
+	\(t_{Dmax,i}\) = maximal zulässige Reaktionszeit
 \end{quote}
+
+Airbag: \\
+\(t_{Dmax}\) = 50ms(Zeit bis zum Aufschlag) - 30ms(Zeit zum aufblasen) = 20ms \\
+\(t_{Dmin}\) = 0ms
+
+Phase = minimal Zeitlicher Abstand zwischen zwei \textcolor{red}{unterschiedlicher} RZ-Anforderungen \(t_{Ph,i,j}\) \\
+
+\subsection{Rechenprozesse}
+
+\begin{description}
+\item - Ausführuntgszeit (Executiontime) = Rechenzeit für eine RZ-Anforderung (ohne Warte oder Schlafzeiten)	
+	\begin{description}
+		\item - WCET \(t_{Emax,i}\) --$>$ Erfahrung oder Messen \textcolor{gray}{Worstcase}
+		\item - BCET \(t_{Emin,i}\) = 0 \textcolor{gray}{Bestcase}
+	\end{description}
+\end{description}
+
+\fbox{
+	\parbox{\textwidth}
+	{
+		\textcolor{red}{ \(t_{E,u}\) = 100ms }
+		\textcolor{blue}{ \(t_{E,t}\) = 50ms }
+						
+		\begin{tikzpicture}
+			\draw[ultra thick, ->] (0,0) -- (12,0);
+			\node[anchor=north] at (12,0) {t[ms]};
+			\foreach \x in {0,1,2,3,4,5,6,7,8,9,10}
+			{
+				\draw (\x cm,3pt) -- (\x cm,-3pt);
+			}
+
+			\foreach \x in {0,2,4,8,10}
+			{
+				\pgfmathsetmacro\result{\x+1}
+				\draw [fill=red] (\x,0) rectangle (\result, 6pt);
+			}
+			
+			\draw [fill=red] (6.5,0) rectangle (7.5, 6pt);
+			\draw [fill=blue] (6,0) rectangle (6.5, 6pt);
+									
+			\foreach \x in {0,2,4,6,8,10} {
+				\pgfmathsetmacro\result{\x * 100}
+				\draw[ultra thick] (\x,0) node[below=3pt,thick] {\result} node[above=3pt] {};
+				\draw[ultra thick] (\x,9pt) node[above] {\textcolor{red}{u}} {};
+			}
+		\end{tikzpicture}
+	}
+}
+
+- Reaktionszeit \(t_{R,i}\) = Zeit zwischen den Auftreten der RZ-Anforderungen \textcolor{red}{i} und dem Ende der Bearbeitung. \\
+
+\(T_{Rmax,i}\) = maximale Reaktionszeit \\
+\(T_{Rmin,i}\) = minimale Reaktionszeit \\
+\(T_{R,i}\) = \textcolor{red}{\(t_{W,i}\)} \(+ t_{E,i}\) wobei \textcolor{red}{ \(t_{W,i}\) } Summe aller Wartezeiten
+
+\subsection{Systemsoftware}
+
+- Latenzzeit
+
+
 
 
 

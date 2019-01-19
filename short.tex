@@ -1,0 +1,42 @@
+\documentclass[12pt,a4paper,oneside,ngerman]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{color}
+\usepackage{tikz}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{calc}
+
+\title{EZS}
+\author{Simon Krücken}
+
+\begin{document}
+    
+%\begin{titlepage}
+%    \maketitle
+%\end{titlepage}
+%\tableofcontents
+
+\section[Formeln]{Formeln}
+
+\(t_{Pmin,i} = minimal\) =$>$ \(t_{max,i} = \dfrac{1}{ t_{Pmin,i} }\) \\
+\(t_{Pmax,i} = maximal\) \textcolor{gray}{$<$= uninteressant} \\
+\(t_{Dmin,i}\) = minimal zulässige Reaktionszeit \\
+\(t_{Dmax,i}\) = maximal zulässige Reaktionszeit
+
+\begin{description}
+    \item - Ausführuntgszeit (Executiontime) = Rechenzeit für eine RZ-Anforderung (ohne Warte oder Schlafzeiten)	
+        \begin{description}
+            \item - WCET \(t_{Emax,i}\) --$>$ Erfahrung oder Messen \textcolor{gray}{Worstcase}
+            \item - BCET \(t_{Emin,i}\) = 0 \textcolor{gray}{Bestcase}
+        \end{description}
+    \end{description}
+
+\(T_{Rmax,i}\) = maximale Reaktionszeit \\
+\(T_{Rmin,i}\) = minimale Reaktionszeit \\
+\(T_{R,i}\) = \textcolor{red}{\(t_{W,i}\)} \(+ t_{E,i}\) wobei \textcolor{red}{ \(t_{W,i}\) } Summe aller Wartezeiten
+
+
+
+
+
+\end{document}

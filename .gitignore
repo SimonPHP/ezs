@@ -3,3 +3,8 @@ ezs.fdb_latexmk
 ezs.fls
 ezs.log
 ezs.synctex.gz
+short.aux
+short.fdb_latexmk
+short.fls
+short.log
+short.synctex.gz
