@@ -1,0 +1,40 @@
+\contentsline {section}{\numberline {1}placeholder}{1}
+\contentsline {section}{\numberline {2}Zentrale Beschreibgr\IeC {\"o}\IeC {\ss }en}{1}
+\contentsline {subsection}{\numberline {2.1}placeholder}{1}
+\contentsline {paragraph}{Defintion}{1}
+\contentsline {subsubsection}{\numberline {2.1.1}Technischer Prozess}{1}
+\contentsline {paragraph}{Beispiel}{2}
+\contentsline {subsubsection}{\numberline {2.1.2}Rechenprozesse}{2}
+\contentsline {subsubsection}{\numberline {2.1.3}Systemsoftware}{3}
+\contentsline {subsection}{\numberline {2.2}Realzeitbedingungen}{3}
+\contentsline {subsubsection}{\numberline {2.2.1}Auslastungsbedingung}{3}
+\contentsline {subsubsection}{\numberline {2.2.2}Rechtzeitigkeitsbedingung}{4}
+\contentsline {subsubsection}{\numberline {2.2.3}Harte und weiche Realzeit}{4}
+\contentsline {subsection}{\numberline {2.3}Systemaspekte}{5}
+\contentsline {subsubsection}{\numberline {2.3.1}Unterbrechbarkeit}{5}
+\contentsline {paragraph}{Forderung:}{5}
+\contentsline {paragraph}{Begr\IeC {\"u}ndung:}{5}
+\contentsline {paragraph}{Konsequenzen:}{5}
+\contentsline {subsubsection}{\numberline {2.3.2}Priorit\IeC {\"a}ten}{6}
+\contentsline {paragraph}{Forderung:}{6}
+\contentsline {subsubsection}{\numberline {2.3.3}Ressourcenmanagment}{6}
+\contentsline {section}{\numberline {3}Systemsoftware}{6}
+\contentsline {subsection}{\numberline {3.1}Firmware}{6}
+\contentsline {paragraph}{Aufgabe:}{6}
+\contentsline {paragraph}{Auspr\IeC {\"a}gungen:}{6}
+\contentsline {subsection}{\numberline {3.2}RT-OS}{7}
+\contentsline {paragraph}{Defintion.:}{7}
+\contentsline {paragraph}{Anforderungen:}{7}
+\contentsline {paragraph}{Beispiele:}{7}
+\contentsline {paragraph}{Systemarchitektur}{7}
+\contentsline {subsubsection}{\numberline {3.2.1}Systemcall-Interface}{8}
+\contentsline {paragraph}{Beispiele:}{8}
+\contentsline {paragraph}{Ablauf:}{8}
+\contentsline {subsubsection}{\numberline {3.2.2}Taskmanagment}{8}
+\contentsline {paragraph}{Aufgabe:}{8}
+\contentsline {paragraph}{Singelcore-Scheduling}{8}
+\contentsline {paragraph}{Erzeugen von Rechenprozessen}{10}
+\contentsline {subsubsection}{\numberline {3.2.3}Scheduling}{12}
+\contentsline {paragraph}{Def.:}{12}
+\contentsline {subsubsection}{\numberline {3.2.4}Singlecore Scheduling}{13}
+\contentsline {paragraph}{Beispiel:}{14}

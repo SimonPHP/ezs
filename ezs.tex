@@ -15,10 +15,10 @@
 
 \begin{document}
     
-%\begin{titlepage}
+\begin{titlepage}
 %    \maketitle
-%\end{titlepage}
-%\tableofcontents
+\end{titlepage}
+\tableofcontents
 
 \section[placeholder]{placeholder}
 \section[Zentrale Beschreibgrößen]{Zentrale Beschreibgrößen}
@@ -415,7 +415,7 @@ Content Switch = Aktivierung eines Jobs \\
 \paragraph{Singelcore-Scheduling}
 Realisierung: Modifikation der Rücksprungadresse auf dem Stack beim Interrupt.
 
-\begin{figure}[htbp]
+\begin{figure}[H]
 	\begin{minipage}[t]{6cm}
 	\vspace{0pt}
 	\centering
@@ -441,7 +441,313 @@ Realisierung: Modifikation der Rücksprungadresse auf dem Stack beim Interrupt.
 \end{figure}
 
 
+\begin{figure}[H]
+	\fbox{
+		\parbox{\textwidth}
+		{					
+			\begin{tikzpicture}
+				\draw[ultra thick, ->] (0,0) -- (12,0);
+				\foreach \x in {0,...,10}
+				\draw (\x cm,3pt) -- (\x cm,-3pt);
+
+				\draw [fill=green] (0,0) rectangle (2, 6pt);
+				\draw [fill=red] (2,0) rectangle (5.5, 6pt);
+				\draw [fill=green] (5.5,0) rectangle (7.5, 6pt);
+				
+				\draw (2,25pt) -- (2,-3pt);
+				\draw[ultra thick] (2,25pt) node[above=6pt,thick] {\textcolor{red}{IR}} {};
+
+				\draw[ultra thick] (1,0) node[above=6pt,thick] {\textcolor{green}{mov}} {};
+
+				\draw[ultra thick] (4,0) node[above=6pt,thick] {\textcolor{red}{mov/add/.../iret}} {};
+
+				\draw[ultra thick] (6.5,0) node[above=6pt,thick] {\textcolor{green}{mov}} {};
+
+			\end{tikzpicture}
+		}
+	}
+
+	\fbox{
+		\parbox{\textwidth}
+		{					
+			\begin{tikzpicture}
+				\draw[ultra thick, ->] (0,0) -- (12,0);
+				\foreach \x in {0,...,10}
+				\draw (\x cm,3pt) -- (\x cm,-3pt);
+
+				\draw [fill=green] (0,0) rectangle (2, 6pt);
+				\draw [fill=red] (2,0) rectangle (4.5, 6pt);
+				\draw [fill=orange] (4.5,0) rectangle (6.5, 6pt);
+				\draw [fill=red] (6.5,0) rectangle (7.5, 6pt);
+				\draw [fill=black] (7.5,0) rectangle (9, 6pt);
+				\draw [fill=red] (9,0) rectangle (10, 6pt);
+				
+				\draw (2,25pt) -- (2,-3pt);
+				\draw[ultra thick] (2,25pt) node[above=6pt,thick] {\textcolor{red}{IR}} {};
+
+				\draw[ultra thick] (1,0) node[above=6pt,thick] {\textcolor{green}{mov}} {};
+				\draw[ultra thick] (3.2,0) node[above=6pt,thick] {\textcolor{red}{mov/add/...}} {};
+				\draw[ultra thick] (7,0) node[above=6pt,thick] {\textcolor{red}{iret}} {};
+				\draw[ultra thick] (8.4,0) node[above=6pt,thick] {\textcolor{black}{cmp/jmp}} {};
+
+			\end{tikzpicture}
+		}
+	}
+\end{figure}
+
+Eine Datenstruktur wird benötigt, um alle Informationen zu einer Codesequenzen speichern(Job, Rechenprozess): \textcolor{blue}{Task Controll Block (TCB)}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.5]{umlet/TCB.png}
+\end{figure}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.8]{umlet/taskzustand.png}
+\end{figure}
+
+\paragraph{Erzeugen von Rechenprozessen}
+Neue Jobs werden durch Kopieren von
+\begin{description}
+	\item - TCB
+	\item - Stack-Segment
+	\item - Code-Segment
+	\item - Daten Segment
+	\item - Neue PID vergeben
+\end{description}
+erzeugt
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.8]{umlet/fork.png}
+\end{figure}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.8]{umlet/clone.png}
+\end{figure}
+
+Threads einer Threadgruppe teilen sich Code- und Datensegment
+Vorteil:
+\begin{description}
+	\item - Speicherplatzersparnis
+	\item - schnell erzeugt
+	\item - einfache IPC (Inter Process Communication)
+\end{description}
+Nachteil:
+\begin{description}
+	\item - Safety: Ein amok laufender Thread bringt die gesammte Threadgruppe in einen inkonsistenten Zustand.
+\end{description}
+
+\subsubsection{Scheduling}
+\paragraph{Def.:}
+Auswahl der Task, die arbeiten/rechnen darf \\
+\emph{Content Switch:} Aktivierung der ausgewählten Task \\
+\emph{Statisches Scheduling:} Bedarfsituation ist bekannt \\
+\rotatebox[origin=c]{180}{$\Lsh$} Reihenfolge (Plan) kann im vorhinein festgelegt werden (SPS)\\
+\emph{Dynamisches Scheduling:} Die Auswahl erfolgt auf Basis der aktullen Bedarfsituation (z.B. PC, Smartphone)\\
+\emph{Singlecore Scheduling:} Quasiparallele Verarbeitung auf einem CPU-Kern\\
+\emph{Multicore Scheduling:} Realparallele Verarbeitung auf mehrerern CPU-Kernen\\
+\rotatebox[origin=c]{180}{$\Lsh$} Verteilungsaufgabe
+\emph{Preemption Point:} Auftreten einer RF-Anforderung --$>$ Interrup Serivce Routine(ISR) wird aktiv --$>$ Scheduling
+
+\subsubsection{Singlecore Scheduling}
+\begin{table}[H]
+	\caption{Beispieldaten:}
+	\begin{tabular}{|l|l|l|l|l|l|}
+	\hline
+	RZ-Anf & \(t_{Pmin}\) & \(t_{Dmin}\) & \(t_{Dmax}\) & \(t_{Emin}\) & \(t_{Emax}\) \\ \hline
+	\textcolor{red}{v}      & 20ms         & 0ms          & 20ms         & 1ms          & 5ms          \\ \hline
+	\textcolor{blue}{g}      & 40ms         & 0ms          & 40ms         & 1ms          & 15ms         \\ \hline
+	\textcolor{green}{u}      & 30ms         & 0ms          & 30ms         & 1ms          & 10ms         \\ \hline
+	\end{tabular}
+\end{table}
+
+\emph{First come First Serve (FCFS, FIFO)} \\
+\begin{description}
+	\item - Lauffähige Jobs werden gemäß Auftrittszeitpunkt in eine Queue eingeführt
+	\item - Der erste Job in der Liste wird ausgewählt
+	\item - Er darf solange die CPU benutzen (rechnen) bis
+	\begin{description}
+		\item a) er sich schlafen legt
+		\item b) er sich beendet
+	\end{description}
+	\item Ein "aufgeweckter" Job wird an den Anfang der Queue gestelt und unterbricht den laufenden Job nicht.
+\end{description}
 
 
+\fbox{
+	\parbox{\textwidth}
+	{					
+		\begin{tikzpicture}
+			\draw[ultra thick, ->] (0,0) -- (14,0);
+			\foreach \x in {0,...,13}
+			\draw (\x cm,3pt) -- (\x cm,-3pt);
+
+
+			\draw [fill=red] (0,0) rectangle (0.5, 6pt);
+			\draw [fill=blue] (0.5,0) rectangle (2, 6pt);
+			\draw [fill=green] (2,0) rectangle (3, 6pt);
+			\draw [fill=red] (3,0) rectangle (3.5, 6pt);
+			\draw [fill=green] (3.5,0) rectangle (4.5, 6pt);
+			\draw [fill=red] (4.5,0) rectangle (5, 6pt);
+			\draw [fill=blue] (5,0) rectangle (6.5, 6pt);
+			\draw [fill=red] (6.5,0) rectangle (7, 6pt);
+			\draw [fill=green] (7,0) rectangle (8, 6pt);
+		
+
+			\foreach \x in {0,2,...,12}
+			{
+				\draw[ultra thick] (\x,0) node[above=6pt,thick] {\textcolor{red}{v}} {};
+			}
+
+			\foreach \x in {0,4,...,12}
+			{
+				\draw[ultra thick] (\x,0) node[above=14pt,thick] {\textcolor{blue}{g}} {};
+			}
+
+			\foreach \x in {0,3,...,12}
+			{
+				\draw[ultra thick] (\x,0) node[above=24pt,thick] {\textcolor{green}{u}} {};
+			}
+
+			\foreach \x in {0,...,13} {
+			\pgfmathtruncatemacro\result{round(\x * 10)}
+			\draw[ultra thick] (\x,0) node[below=3pt,thick] {\result} node[above=3pt] {};
+
+
+			\draw[ultra thick] (11,-2) node[above,thick] {
+			\textcolor{blue}{g}
+			\textcolor{red}{v}
+			\sout{\textcolor{green}{u}
+			\textcolor{red}{v}
+			\textcolor{blue}{g}
+			\textcolor{red}{v}
+			\textcolor{green}{u}
+			\textcolor{red}{v}
+			\textcolor{green}{u}
+			\textcolor{blue}{g}
+			\textcolor{red}{v}}
+			--$>$} {};
+
+		}
+		\end{tikzpicture}
+	}
+}
+
+\emph{Zeitscheibenverfahren (Round Robin, Rate Monotonic)}
+\begin{description}
+	\item - Lauffähige Jobs werden gemäß Auftrittszeitpunkt in eine Queue eingehängt
+	\item - Der erste Job in der Liste wird ausgewählt
+	\item - Er darf die CPU benutzen bis
+	\begin{description}
+		\item a) er sich schlafen left
+		\item b) er sich beendet
+		\item c) seine Zeitscheibe (Quantum) aufgebraucht ist
+	\end{description}
+	\item - Ein aufgeweckter Job wird ans Ende der Queue angehängt
+\end{description}
+\textcolor{magenta}{Zeitscheibe 10ms}
+
+\fbox{
+	\parbox{\textwidth}
+	{					
+		\begin{tikzpicture}
+			\draw[ultra thick, ->] (0,0) -- (14,0);
+			\foreach \x in {0,...,13}
+			\draw (\x cm,3pt) -- (\x cm,-3pt);
+
+			\draw [fill=red] (0,0) rectangle (0.5, 6pt);
+			\draw [fill=blue] (0.5,0) rectangle (1.5, 6pt);
+			\draw [fill=green] (1.5,0) rectangle (2.5, 6pt);
+			\draw [fill=blue] (2.5,0) rectangle (3, 6pt);
+			\draw [fill=red] (3,0) rectangle (3.5, 6pt);
+			\draw [fill=green] (3.5,0) rectangle (4.5, 6pt);
+			\draw [fill=red] (4.5,0) rectangle (5, 6pt);
+			\draw [fill=blue] (5,0) rectangle (6.5, 6pt);
+			\draw [fill=red] (6.5,0) rectangle (7, 6pt);
+			\draw [fill=green] (7,0) rectangle (8, 6pt);
+			\draw [fill=red] (8,0) rectangle (8.5, 6pt);
+			\draw [fill=blue] (8.5,0) rectangle (9.5, 6pt);
+			\draw [fill=green] (9.5,0) rectangle (10.5, 6pt);
+			\draw [fill=blue] (10.5,0) rectangle (11, 6pt);
+			\draw [fill=red] (11,0) rectangle (11.5, 6pt);
+		
+
+			\foreach \x in {0,2,...,12}
+			{
+				\draw[ultra thick] (\x,0) node[above=6pt,thick] {\textcolor{red}{v}} {};
+			}
+
+			\foreach \x in {0,4,...,12}
+			{
+				\draw[ultra thick] (\x,0) node[above=14pt,thick] {\textcolor{blue}{g}} {};
+			}
+
+			\foreach \x in {0,3,...,12}
+			{
+				\draw[ultra thick] (\x,0) node[above=24pt,thick] {\textcolor{green}{u}} {};
+			}
+
+			\foreach \x in {0,...,13} {
+			\pgfmathtruncatemacro\result{round(\x * 10)}
+			\draw[ultra thick] (\x,0) node[below=3pt,thick] {\result} node[above=3pt] {};
+
+
+			\draw[ultra thick] (9,-2) node[above,thick] {
+
+			\textcolor{green}{u}
+			\textcolor{blue}{g}
+			\textcolor{red}{v}
+			-IDLE-
+			\sout{ \textcolor{red}{v}
+			\textcolor{blue}{g}
+			\textcolor{green}{u}
+			\textcolor{blue}{g}
+			\textcolor{red}{v}
+			\textcolor{green}{u}
+			\textcolor{red}{v}
+			\textcolor{blue}{g}
+			\textcolor{blue}{g}
+			\textcolor{red}{v}
+			\textcolor{green}{u}
+			\textcolor{red}{v}
+			\textcolor{blue}{g}
+			\textcolor{green}{u}
+			\textcolor{blue}{g}
+			\textcolor{red}{v}}
+			--$>$} {};
+		}
+		\end{tikzpicture}
+	}
+}
+
+\emph{Prioritätengesteuertes Scheduling}
+\begin{description}
+	\item - Jedem Job wird eine Priorität zugewiesen
+	\item - Der \textcolor{magenta}{Lauffähige} Job mit der höchsten Priorität wird ausgewählt
+	\item - Er darf rechnen bis
+	\begin{description}
+		\item a) er sich schlafen legt
+		\item b) er sich beendet
+		\item c) ein Job mit höherer Prio Lauffähig wird
+	\end{description}
+\end{description}
+\textcolor{blue}{Problem: Verteilung der Prioritäten}
+
+\fbox{
+	\parbox{\textwidth}
+	{	
+		kurze \(t_{Emax}\) \textcolor{red}{und} kurze \(t_{Pmin}\) --$>$ hohe Prio
+	}
+}
+
+\textcolor{red}{Gibt es zwischen \(t_{E,i}\) und \(t_{P,i}\) keine Korrelation hilft bei der Prioritätenverteilung nur ausprobieren!} \\
+
+\paragraph{Beispiel:}
+	\textcolor{red}{V = 1 (höchste Prio)} \\
+	\textcolor{blue}{G = 3 (niedrigste Prio)} \\
+	\textcolor{green}{U = 2 (mittlere Prio)} \\
 
 \end{document}
