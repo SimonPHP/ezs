@@ -35,8 +35,26 @@
 \(T_{Rmin,i}\) = minimale Reaktionszeit \\
 \(T_{R,i}\) = \textcolor{red}{\(t_{W,i}\)} \(+ t_{E,i}\) wobei \textcolor{red}{ \(t_{W,i}\) } Summe aller Wartezeiten
 
+- Latenzzeit \(t_{L_i}\)
+\textcolor{blue}{
+	- Interrup Latenzzeit
+	- Tasklatenzzeit
+}
 
+\(\rho_i = \dfrac{t_{E,i}}{t_{P,i}}\) Auslastung dur RZ-Anforderung i
 
+\(\rho_{max,i} = \dfrac{t_{Emax,i}}{t_{Pin,i}}\) Worstcase, max. Auslastung
+
+\fbox{
+	\parbox{\textwidth}
+	{
+		1. RT Bedingung
+
+		\(\rho_{max,ges} = \displaystyle\sum_{j=1}^n \dfrac{t_{Emax,i}}{t_{Pin,i}} \leq c\) \\
+		j = für alle RZ-Anforderungen,
+		c = Anzahl der Rechnerkerne
+	}
+}
 
 
 \end{document}
