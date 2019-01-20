@@ -60,4 +60,7 @@
 \contentsline {paragraph}{1. Schritt:}{24}
 \contentsline {paragraph}{2. Schritt:}{24}
 \contentsline {paragraph}{3. Schritt:}{24}
-\contentsline {paragraph}{Beispiel:}{26}
+\contentsline {paragraph}{1. Schritt:}{27}
+\contentsline {paragraph}{2. Schritt:}{27}
+\contentsline {paragraph}{3. Aufstellen:}{27}
+\contentsline {paragraph}{4. \IeC {\"U}berpr\IeC {\"u}fung der RT-Bedingung:}{28}
