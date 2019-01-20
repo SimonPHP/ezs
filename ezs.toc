@@ -56,7 +56,7 @@
 \contentsline {section}{\numberline {4}placeholder4}{23}
 \contentsline {section}{\numberline {5}placeholder5}{23}
 \contentsline {section}{\numberline {6}Realzeitnachweis}{23}
-\contentsline {subsection}{\numberline {6.1}Zentrale Beschreibungsgr\IeC {\"o}\IeC {\ss }en (Wiederholung)}{23}
+\contentsline {subsection}{\numberline {6.1}Zentrale Beschreibgr\IeC {\"o}\IeC {\ss }en (Wiederholung)}{23}
 \contentsline {paragraph}{1. Schritt:}{24}
 \contentsline {paragraph}{2. Schritt:}{24}
 \contentsline {paragraph}{3. Schritt:}{24}
