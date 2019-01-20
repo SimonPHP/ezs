@@ -19,6 +19,7 @@
 %    \maketitle
 \end{titlepage}
 \tableofcontents
+\pagebreak
 
 \section[placeholder]{placeholder}
 \section[Zentrale Beschreibgrößen]{Zentrale Beschreibgrößen}
@@ -749,5 +750,300 @@ Auswahl der Task, die arbeiten/rechnen darf \\
 	\textcolor{red}{V = 1 (höchste Prio)} \\
 	\textcolor{blue}{G = 3 (niedrigste Prio)} \\
 	\textcolor{green}{U = 2 (mittlere Prio)} \\
+
+
+\fbox{
+	\parbox{\textwidth}
+	{					
+		\begin{tikzpicture}
+			\draw[ultra thick, ->] (0,0) -- (14,0);
+			\foreach \x in {0,...,13}
+			\draw (\x cm,3pt) -- (\x cm,-3pt);
+
+			\draw [fill=red] (0,0) rectangle (0.5, 6pt);
+			\draw [fill=green] (0.5,0) rectangle (1.5, 6pt);
+			\draw [fill=blue] (1.5,0) rectangle (2, 6pt);
+			\draw [fill=red] (2,0) rectangle (2.5, 6pt);
+			\draw [fill=blue] (2.5,0) rectangle (3, 6pt);
+			\draw [fill=green] (3,0) rectangle (4, 6pt);
+			\draw [fill=red] (4,0) rectangle (4.5, 6pt);
+			\draw [fill=blue] (4.5,0) rectangle (6, 6pt);
+			\draw [fill=red] (6,0) rectangle (6.5, 6pt);
+			\draw [fill=green] (6.5,0) rectangle (7.5, 6pt);
+			\draw [fill=blue] (7.5,0) rectangle (8, 6pt);
+			\draw [fill=red] (8,0) rectangle (8.5, 6pt);
+			\draw [fill=blue] (8.5,0) rectangle (9, 6pt);
+			\draw [fill=green] (9,0) rectangle (10, 6pt);
+			\draw [fill=red] (10,0) rectangle (10.5, 6pt);
+			\draw [fill=blue] (10.5,0) rectangle (11.5, 6pt);
+
+			\foreach \x in {0,2,...,12}
+			{
+				\draw[ultra thick] (\x,0) node[above=6pt,thick] {\textcolor{red}{v}} {};
+			}
+
+			\foreach \x in {0,4,...,12}
+			{
+				\draw[ultra thick] (\x,0) node[above=14pt,thick] {\textcolor{blue}{g}} {};
+			}
+
+			\foreach \x in {0,3,...,12}
+			{
+				\draw[ultra thick] (\x,0) node[above=24pt,thick] {\textcolor{green}{u}} {};
+			}
+
+			\draw (4 ,3pt) -- (4 ,-24pt);
+			\draw[ultra thick] (4,0) node[below=24pt,thick] {Deadline verletzung} node[above=3pt] {};
+
+			\foreach \x in {0,...,13} {
+			\pgfmathtruncatemacro\result{round(\x * 10)}
+			\draw[ultra thick] (\x,0) node[below=3pt,thick] {\result} node[above=3pt] {};
+
+		}
+		\end{tikzpicture}
+		\textcolor{blue}{g} tirtt erneut auf obwohl \textcolor{blue}{g} noch nicht fertig abgearbeitet ist.
+		Die letzten 5ms vom alten \textcolor{blue}{g} werden erst bei 45ms abgearbeitet.
+	}
+}
+
+\emph{Deadline-Scheduling (Earliest Deadline First)}
+\begin{description}
+	\item - Der Lauffähige Job, der als erstes fertig sein muss (\(t_{Dmax}\)) darf rechnen.
+	\item - Er darf arbeiten bis
+	\begin{description}
+		\item a) er sich schlafen legt
+		\item b) er sich beendet
+		\item c) ein Job Lauffähig wird, der früher abgeschlossen sein muss.
+	\end{description}
+\end{description}
+
+\fbox{
+	\parbox{\textwidth}
+	{					
+		\begin{tikzpicture}
+			\draw[ultra thick, ->] (0,0) -- (14,0);
+			\foreach \x in {0,...,13}
+			\draw (\x cm,3pt) -- (\x cm,-3pt);
+
+			\draw [fill=red] (0,0) rectangle (0.5, 6pt);
+			\draw [fill=green] (0.5,0) rectangle (1.5, 6pt);
+			\draw [fill=blue] (1.5,0) rectangle (3, 6pt);
+			\draw [fill=red] (3,0) rectangle (3.5, 6pt);
+			\draw [fill=green] (3.5,0) rectangle (4.5, 6pt);
+			\draw [fill=red] (4.5,0) rectangle (5, 6pt);
+			\draw [fill=blue] (5,0) rectangle (6.5, 6pt);
+			\draw [fill=red] (6.5,0) rectangle (7, 6pt);
+			\draw [fill=green] (7,0) rectangle (8, 6pt);
+			\draw [fill=red] (8,0) rectangle (8.5, 6pt);
+			\draw [fill=blue] (8.5,0) rectangle (10, 6pt);
+			\draw [fill=green] (10,0) rectangle (11, 6pt);
+			\draw [fill=red] (11,0) rectangle (11.5, 6pt);
+			\draw [fill=red] (12,0) rectangle (12.5, 6pt);
+			\draw [fill=green] (12.5,0) rectangle (13.5, 6pt);
+
+
+			\foreach \x in {0,2,...,12}
+			{
+				\pgfmathtruncatemacro\result{round((\x / 2)+1}
+				\pgfmathtruncatemacro\resutt{\x + 2}
+				\draw[ultra thick] (\x,0) node[above=6pt,thick] {\textcolor{red}{ \( v_\result \) }} {};
+				\ifnum\x<12
+					\draw[ultra thick] (\resutt,0) node[below=14pt,thick] {\textcolor{red}{ \( |_\result \) }} {};
+				\fi
+			}
+
+			\foreach \x in {0,4,...,12}
+			{
+				\pgfmathtruncatemacro\result{round((\x / 4)+1}
+				\pgfmathtruncatemacro\resutt{\x + 4}
+				\draw[ultra thick] (\x,0) node[above=14pt,thick] {\textcolor{blue}{\( g_\result \)}} {};
+				\ifnum\x<12
+					\draw[ultra thick] (\resutt,0) node[below=26pt,thick] {\textcolor{blue}{ \( |_\result \) }} {};
+				\fi
+			}
+
+			\foreach \x in {0,3,...,12}
+			{
+				\pgfmathtruncatemacro\result{round((\x / 3)+1}
+				\pgfmathtruncatemacro\resutt{\x + 3}
+				\draw[ultra thick] (\x,0) node[above=24pt,thick] {\textcolor{green}{\( u_\result \)}} {};
+				\ifnum\x<12
+					\draw[ultra thick] (\resutt,0) node[below=38pt,thick] {\textcolor{green}{ \( |_\result \) }} {};
+				\fi
+			}
+
+			\foreach \x in {0,...,13} {
+			\pgfmathtruncatemacro\result{round(\x * 10)}
+			\draw[ultra thick] (\x,0) node[below=3pt,thick] {\result} node[above=3pt] {};
+			}
+		\end{tikzpicture}
+	}
+}
+
+Eignung für RT-Systeme: \textcolor{orange}{optimales Verfahren}\\
+
+\emph{Kombinierte Schedulingverfahren}
+\begin{description}
+	\item - Prioritätengesteuertes Scheduling --$>$ Prioritätsebene
+	\item - Jobs mit gleiche Priorität (=auf gleicher Prioritätsebene)
+	\begin{equation*}
+		\begin{rcases}
+				werden \textcolor{white}{a} gemaess \textcolor{white}{a} a) Round Robin\\
+				\textcolor{white}{werden gemaessaai } b) FCFS (FIFO)
+		\end{rcases} 
+		\text{ \textcolor{magenta}{Posix-Scheduling}}
+	\end{equation*}
+	\item gescheduled \textcolor{green}{=$>$ Linux,} \textcolor{magenta}{{ \[\underbrace{VxWorks, Windows}_{\text{Round Robin}} \]}}
+\end{description}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.5]{umlet/windows_prio.png}
+\end{figure}
+
+\paragraph{Linux:}
+Prioritäten per Konsole vergeben: \textcolor{green}{chrt 69 ./carrera} // werte von 0..99 \\
+Konzept der Scheduling Klassen:
+\begin{description}
+	\item 0 Stop-Sched-Class
+	\item 1 Prioritäten gesteuertes Scheduling
+	\item 2 EDF (Earliest Deadline first)
+	\item 3 CFS (Completly Fair Scheduling)
+	\item 4 Idle Shed. Class
+\end{description}
+
+\subsubsection{Multicore Scheduling}
+\paragraph{Aufgabe:}
+Verteilung der Jobs auf die CPU-Kerne, so dass unsere Zeitbedingunen eingehalten werden \emph{und} das System (eneregie-)effizent arbeitet.
+
+\paragraph{Lösungen:}
+\begin{description}
+	\item 1. Partitioniert Scheduling\\ Tasks werden auf die CPU-Kerne Statisch verteilt.(per Hand)
+	\item 2. Semipartioniertes Scheduling\\ tastk werden in Gruppen auf die CPU-Kerne verteilt.
+	\item 3. Globales Scheduling\\ Scheduler verteilt die Tasks auf Basis der aktuellen Lastsituation.
+\end{description}
+
+\emph{Taskmigration:} Verschiebung von Tasks auf andere CPU-Kerne\\
+Problemstellung:
+\begin{description}
+	\item - \textcolor{green}{Kosten} der Taskmigration sind abhängig von der eingesetzten Hardware
+	\item - \textcolor{green}{Nutzen} ist abhängig von der eingesetzten Hardware
+\end{description}
+
+\emph{Hardware-Architekturen}
+SMP: Symmetirc Multi Processing (= alle CPU Kerne sind gleich)\\
+Kosten: mittel\\
+Nutzen: mittel\\
+SMT: Symmetric Multi Threading (Hyperthreading, = Verdopplung der Instruction Pipeline)\\
+Kosten: niedrig\\
+Nutzen: niedrig\\
+NUMA: Non Uniform memory Architecture\\
+Kosten: hoch\\
+Nutzen: hoch\\
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.4]{umlet/numa.png}
+\end{figure}
+
+bigLITTLE-Architektur: (z.B. 4(starke) + 4(schwache) Kerne) \\
+Optimierungsziel: Energieeffizienz\\
+Kosten(in hinblick auf Leistung) = SMP(mittel)\\
+Nutzen = SMP(mittel)\\
+
+AMP: Asymmetirc Multiprocessing (unterschiedliche CPU-Kerne)\\
+Kosten: hoch\\
+Nutzen: je nach Anwendung\\
+=$>$ wird in der Praxis über Partitioniertes Scheduling genutzt.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.4]{umlet/numa_node.png}
+\end{figure}
+
+\begin{figure}[H]
+	Linux bildet beim Booten eine \textcolor{orange}{Scheduling Domain}
+	\centering
+	\includegraphics[scale=0.6]{umlet/scheduling_domain.png}
+\end{figure}
+
+Der Multicore Scheduler balanziert die last innerhalb einer Scheduling Domain --$>$ sorgt für ausgegelichen Lastverhältnisse.\\
+Die einzelnen Cores verwenden einen Single-Core Scheduler.
+Unter Linux ist der name der Rechenprozesse, die für Multicore-Scheduling zuständig sind "\textcolor{magenta}{migration}".\\
+\paragraph{Der Multi-Core Scheduler wird aktiv:}
+\begin{description}
+	\item - exit()
+	\item - pthread\_create(), clone(), fork()
+	\item - clock\_nanosleep()
+	\item - zeitgesteuert
+\end{description}
+
+\subsubsection{Memory Managment}
+\paragraph{Aufgaben:}
+\begin{description}
+	\item - Speicherschutz
+	\item - Adressumsetzung
+	\item - virtuellen Speicher zur verfügung stellen
+	\item - erweiterten Speicher zur verfügung stellen
+\end{description}
+Technologien:
+\begin{description}
+	\item 1. Segmentierung
+	\item 2. Paging (Seitenorientierung)
+\end{description}
+
+\emph{Segmentierung}\\
+
+GRAFIK\\
+
+\emph{Paging}\\
+
+GRAFIK\\
+
+Auf 32 Bit Systemen: Two Level Paging\\
+Auf 64 Bit Systemen: Three Level paging\\
+
+\paragraph{Konsequenz:}
+Um eine Variable aus dem Hauptspeicher zu lesen, sind auf einem 32 Bit System 3 Hauptspeicherzugriffe notwendig.\\
+=$>$ zur Optimierung TCB (Cache)\\
+Außerdem: In den Page Directories sind die obersten Einträge (auf 32Bit 15 Byte) für den Kernelspace reserviert.
+
+\subsubsection{I/O Managment}
+
+\begin{figure}[H]
+	\begin{minipage}[t]{6cm}
+	\vspace{0pt}
+	Aufgabe:
+	\begin{description}
+	\item a) Einheitliche API für den HW Zugriff
+	\item b) Systemkonforme Integration von Hardware über Gerätetreiber
+	\item c) Strukturierter Zugriff auf Daten (Filesystem)
+	\end{description}
+	\end{minipage}
+	\hfill
+	\begin{minipage}[t]{6cm}
+		\vspace{0pt}
+		\centering
+		\includegraphics[scale=0.35]{umlet/userland_kernel.png}
+	\end{minipage}
+\end{figure}
+
+API: \textcolor{blue}{open, cloes(), read(), write(), ioctl(), fcntl(), seek()}
+
+\fbox{
+	\parbox{\textwidth}
+	{	
+		\emph{Hintergrund: Direct I/O - Bufferd I/O}\\
+		\textcolor{red}{printf("$\backslash$n Hallo");} $<$-- Buffered\\
+		\textcolor{green}{printf("Hallo $\backslash$n");}
+
+		Buffered I/O =$>$ Daten werden aus Performance-Gründen zwischengespeichert.
+		Reale Ausgabe erfolgt, wenn der Zwischenspeicher (Buffer) voll ist oder wenn ein "$\backslash$n" kommt.\\
+
+		\textcolor{green}{fopen(), fclose(), fprintf(), fwrite(), fread(), fflush()}\\
+
+		Direct I/O =$>$ Ein-/Ausgabe-Aufrufe werden direkt ausgeführt.
+	}
+}
 
 \end{document}
