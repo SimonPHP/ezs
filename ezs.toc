@@ -47,3 +47,17 @@
 \contentsline {paragraph}{Aufgaben:}{19}
 \contentsline {paragraph}{Konsequenz:}{20}
 \contentsline {subsubsection}{\numberline {3.2.7}I/O Managment}{20}
+\contentsline {paragraph}{Zugriffsarten:}{21}
+\contentsline {paragraph}{Idee:}{21}
+\contentsline {paragraph}{Au\IeC {\ss }erdem:}{21}
+\contentsline {paragraph}{Und:}{22}
+\contentsline {paragraph}{Beispiel:}{22}
+\contentsline {paragraph}{Merkmale:}{22}
+\contentsline {section}{\numberline {4}placeholder4}{23}
+\contentsline {section}{\numberline {5}placeholder5}{23}
+\contentsline {section}{\numberline {6}Realzeitnachweis}{23}
+\contentsline {subsection}{\numberline {6.1}Zentrale Beschreibungsgr\IeC {\"o}\IeC {\ss }en (Wiederholung)}{23}
+\contentsline {paragraph}{1. Schritt:}{24}
+\contentsline {paragraph}{2. Schritt:}{24}
+\contentsline {paragraph}{3. Schritt:}{24}
+\contentsline {paragraph}{Beispiel:}{26}

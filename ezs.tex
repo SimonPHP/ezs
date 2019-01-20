@@ -141,14 +141,14 @@ Phase = minimal Zeitlicher Abstand zwischen zwei \textcolor{red}{unterschiedlich
 
 \(\rho_i = \dfrac{t_{E,i}}{t_{P,i}}\) Auslastung dur RZ-Anforderung i \\
 
-\(\rho_{max,i} = \dfrac{t_{Emax,i}}{t_{Pin,i}}\) Worstcase, max. Auslastung
+\(\rho_{max,i} = \dfrac{t_{Emax,i}}{t_{Pmin,i}}\) Worstcase, max. Auslastung
 
 \fbox{
 	\parbox{\textwidth}
 	{
 		1. RT Bedingung
 
-		\(\rho_{max,ges} = \displaystyle\sum_{j=1}^n \dfrac{t_{Emax,i}}{t_{Pin,i}} \leq c\) \\
+		\(\rho_{max,ges} = \displaystyle\sum_{j=1}^n \dfrac{t_{Emax,i}}{t_{Pmin,i}} \leq c\) \\
 		j = für alle RZ-Anforderungen,
 		c = Anzahl der Rechnerkerne
 	}
@@ -1045,5 +1045,162 @@ API: \textcolor{blue}{open, cloes(), read(), write(), ioctl(), fcntl(), seek()}
 		Direct I/O =$>$ Ein-/Ausgabe-Aufrufe werden direkt ausgeführt.
 	}
 }
+
+\emph{Kontrollfluss (Wann?, Unter welchen Umständen?)}\\
+\paragraph{Zugriffsarten:}
+\begin{description}
+	\item - Blockierend
+	\item - nicht Blockierend
+	\item - Asynchron
+\end{description}
+
+a) Blockierend\\
+Beispiel "read": Job schläft, bis die angeforderten Daten zur Verfügungn stehen --$>$ Carrear Bahn, eigene Spur\\
+
+b) Nicht Blockierend \textcolor{blue}{fd = open("dev/carrera", O\_RDWR$|$O\_NONBLOCK)} \\
+Beispiel "read": Job bekommt die angeforderten Daten oder die Information, dass zu Zeit des Aufrufes keine Daten zur Verfügung stehen.\\
+--$>$ Job wird nicht schlafen gelegt.
+
+c) Asynchron\\
+Aufträge werden dem Kernel übergeben und das Resultat zu einem späteren zeitpunkt abgeholt.\\
+
+\emph{Systemkonforme Integration von Hardware über Gerätetreiber}\\
+\paragraph{Idee:}
+open, close, read, write, ... bieten einen einheitlichen Zugriff auf unterschiedliche Peripherie
+\paragraph{Außerdem:}
+Applikationen sollen keinesfalls direkt auf Peripherie zugreifen können (Safety)
+\paragraph{Und:}
+Applikationen sollen keine Details der Hardware (z.B. Adressen, Bitmaskierungen, Gerätetreiber) kennen müssen.
+
+GRAFIK\\
+
+\emph{Filesysteme}
+Strukturen zur Ablage von Daten auf Hintergrundspeicher in hierarchisch organisierten Datein.\\
+\paragraph{Beispiel:} Ext4, NTFS, FAT32, exFat, JFFS2, ISO9660, ...\\
+
+\paragraph{Merkmale:}
+\begin{description}
+	\item - maximale FileSystem-Größe
+	\item - Anzahl Datein
+	\item - maximale Datei Größe
+	\item - Attribute
+	\item - Zugriffszeit
+\end{description}
+
+\section[placeholder4]{placeholder4}
+\section[placeholder5]{placeholder5}
+
+\section[Realzeitnachweis]{Realzeitnachweis bei Prioritätengesteuerten und EDF-Scheduling}
+\subsection{Zentrale Beschreibungsgrößen (Wiederholung)}
+
+\fbox{
+	\parbox{\textwidth}
+	{	
+		\emph{Technischer prozess: }\\
+		\begin{description}
+			\item - \textcolor{blue}{\(t_{P,i}\)} = Prozesszeit, zeitlicher Abstand zwischen zwei RT-Anforderungen \textcolor{blue}{i} \fbox{ \textcolor{blue}{\(t_{Pmin,i}\)}}
+			\item - \textcolor{blue}{\(t_{Dmin,i}\)} = minimal zulässige Reaktionszeit
+			\item - \textcolor{blue}{\(t_{Dmax,i}\)} = maximal zulässige Reaktionszeit
+			\item - \textcolor{blue}{\(t_{Ph,i}\)} = Phase, zeitlicher Abstand zwischen zwei \textcolor{red}{unterschiedlicher} Ereignise
+		\end{description}
+	}
+}
+
+\fbox{
+	\parbox{\textwidth}
+	{	
+		\emph{Rechenprozesse: }\\
+		\begin{description}
+			\item - \textcolor{blue}{\(t_{Emin,i}\)} = minimale Ausführungszeit BCET
+			\item - \textcolor{blue}{\(t_{Emax,i}\)} = maximale Ausführungszeit WCET
+			\item - \textcolor{blue}{\(t_{Rmin,i}\)} = minimale Reaktionszeit
+			\item - \textcolor{blue}{\(t_{Rmax,i}\)} = maximale Reaktionszeit\\ \rotatebox[origin=c]{180}{$\Lsh$} Zeitlicher Abstand zwischen dem Eintreffen einer RT-Anforderung \textcolor{blue}{i} und dem Ende der Bearbeitung
+			\item - \textcolor{blue}{\(t_{W,i}\)} = Wartezeit, Summe der Zeiten, in der eine Codesequenz arbeiten könnte, aber nicht dran kommt.
+		\end{description}
+	}
+}
+
+\fbox{
+	\parbox{\textwidth}
+	{	
+		\emph{Systemsoftware: }\\
+		\begin{description}
+			\item - \textcolor{blue}{\(t_{L,i}\)} = Latenzzeit, zeitlicher Abstand zwischen dem Eintreffen einer RT-Anforderung \textcolor{blue}{i} und dedm Start der Bearbeitung
+			\item - \textcolor{blue}{Schedulingverfahren}
+		\end{description}
+	}
+}
+
+\fbox{
+	\parbox{\textwidth}
+	{
+		1. RT Bedingung
+
+		\(\rho_{max,ges} = \displaystyle\sum_{j=1}^n \dfrac{t_{Emax,i}}{t_{Pin,i}} \leq c\) \\
+		j = für alle RZ-Anforderungen,
+		c = Anzahl der Rechnerkerne
+	}
+}
+
+\fbox{
+	\parbox{\textwidth}
+	{
+		2. RT Bedingung
+
+		Für alle RZ-Anforderungen j muss gelten:
+
+		\( t_{Dmin,j} \leq t_{Rmin,j} \leq t_{Rmax,j} \leq t_{Dmax,j} \)
+	}
+}
+
+\fbox{
+	\parbox{\textwidth}
+	{
+		Utilization
+		\(u = \displaystyle\sum_{j=1}^n \dfrac{t_{Emax,j}}{ min(t_{Dmax,j}, t_{Pmin,j})} \)
+	}
+}
+
+\emph{Realzeitnachweis bei prioritätengesteuerten Scheduling}\\
+\paragraph{1. Schritt:}
+Anforderungen und zeitliche Parameter der Lösung zusammenstellen.
+\paragraph{2. Schritt:}
+Utilization überprüfen\\
+\textcolor{blue}{Realzeitbedingungen werden grundsätzlich eingehalten, falls}\\
+
+\textcolor{blue}{\(u \leq n\times( 2^\frac{1}{n} - 1)\) wobei n = Anzahl der Threads/Tasks, RT-Anforderungen}
+\begin{description}
+	\item \textcolor{magenta}{n = 1 =$>$ u \(\leq\) 100\%}
+	\item \textcolor{magenta}{n = 2 =$>$ u \(\leq\) 82.8\%}
+	\item \textcolor{magenta}{n = 3 =$>$ u \(\leq\) 78\%}
+	\item \textcolor{magenta}{n -$>$ $\infty$ =$>$ u \(\leq\) 69.3\%}
+\end{description}
+
+\paragraph{3. Schritt:}
+2. Realzeitbedingung überprüfen (falls u $\leq$ \textcolor{blue}{\(u \leq n\times( 2^\frac{1}{n} - 1)\))}\\
+Problem: Bestimmung von \textcolor{blue}{\(t_{Rmax}\)} \\
+Idee: Die \textcolor{blue}{\(t_{Emax}\)} der höhern oder gleich Prioren Tasks werden aufsummiert über die Zeit (= Arbeit für den Rechner zum Zeitpunkt t).
+Es wird der Zeitpunkt gesucht, an dem die benötigte Zeit nicht mehr größer als die zur Verfügung gestellte Rechenzeit ist.\\
+
+\( t_{c,p}(t) = \displaystyle\sum_{j \in J} \Big\lceil \dfrac{t}{ t_{Pmin,j} } \Big\rceil \times t_{Emax,j} \)\\
+J = alle höher oder gleich Prioren Jobs\\
+p = Priorität\\
+
+Die zur Verfügung stehende Rechenzeit ergiebt sich zu \\
+\textcolor{blue}{\( t_{available}(t) = t \)}\\
+Gesucht ist damit die Lösung der Gleichung\\
+\textcolor{blue}{\( t_c(t) = t \)}\\
+Diese Gleichung lässt sich iterativ lösen:\\
+Startwert: \textcolor{blue}{ \(t_{p}^{(1)<-Iterationsschritt} = \displaystyle\sum_{j \in J} t_{Emax,j} \)}\\
+
+Iteration: \textcolor{blue}{ \( t_{p}^{(l+1)} = t_{c,p}(t_{p}^{(l)}) = \displaystyle\sum \Big\lceil \dfrac{t_{p}^{(l)}}{ t_{Pmin,j} } \Big\rceil \times t_{Emax,j} \) }
+
+Abbruch: \textcolor{blue}{ \( t_{p}^{(l)} == t_{p}^{(l+1)} \) }  \textcolor{magenta}{ \( t_{Rmax,p} = t_{p}^{(l)} \) }
+
+\pagebreak
+
+\paragraph{Beispiel:}
+
+
 
 \end{document}

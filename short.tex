@@ -56,5 +56,72 @@
 	}
 }
 
+\fbox{
+	\parbox{\textwidth}
+	{	
+		\emph{Technischer prozess: }\\
+		\begin{description}
+			\item - \textcolor{blue}{\(t_{P,i}\)} = Prozesszeit, zeitlicher Abstand zwischen zwei RT-Anforderungen \textcolor{blue}{i} \fbox{ \textcolor{blue}{\(t_{Pmin,i}\)}}
+			\item - \textcolor{blue}{\(t_{Dmin,i}\)} = minimal zulässige Reaktionszeit
+			\item - \textcolor{blue}{\(t_{Dmax,i}\)} = maximal zulässige Reaktionszeit
+			\item - \textcolor{blue}{\(t_{Ph,i}\)} = Phase, zeitlicher Abstand zwischen zwei \textcolor{red}{unterschiedlicher} Ereignise
+		\end{description}
+	}
+}
+
+\fbox{
+	\parbox{\textwidth}
+	{	
+		\emph{Rechenprozesse: }\\
+		\begin{description}
+			\item - \textcolor{blue}{\(t_{Emin,i}\)} = minimale Ausführungszeit BCET
+			\item - \textcolor{blue}{\(t_{Emax,i}\)} = maximale Ausführungszeit WCET
+			\item - \textcolor{blue}{\(t_{Rmin,i}\)} = minimale Reaktionszeit
+			\item - \textcolor{blue}{\(t_{Rmax,i}\)} = maximale Reaktionszeit\\ \rotatebox[origin=c]{180}{$\Lsh$} Zeitlicher Abstand zwischen dem Eintreffen einer RT-Anforderung \textcolor{blue}{i} und dem Ende der Bearbeitung
+			\item - \textcolor{blue}{\(t_{W,i}\)} = Wartezeit, Summe der Zeiten, in der eine Codesequenz arbeiten könnte, aber nicht dran kommt.
+		\end{description}
+	}
+}
+
+\fbox{
+	\parbox{\textwidth}
+	{	
+		\emph{Systemsoftware: }\\
+		\begin{description}
+			\item - \textcolor{blue}{\(t_{L,i}\)} = Latenzzeit, zeitlicher Abstand zwischen dem Eintreffen einer RT-Anforderung \textcolor{blue}{i} und dedm Start der Bearbeitung
+			\item - \textcolor{blue}{Schedulingverfahren}
+		\end{description}
+	}
+}
+
+\fbox{
+	\parbox{\textwidth}
+	{
+		1. RT Bedingung
+
+		\(\rho_{max,ges} = \displaystyle\sum_{j=1}^n \dfrac{t_{Emax,i}}{t_{Pin,i}} \leq c\) \\
+		j = für alle RZ-Anforderungen,
+		c = Anzahl der Rechnerkerne
+	}
+}
+
+\fbox{
+	\parbox{\textwidth}
+	{
+		2. RT Bedingung
+
+		Für alle RZ-Anforderungen j muss gelten:
+
+		\( t_{Dmin,j} \leq t_{Rmin,j} \leq t_{Rmax,j} \leq t_{Dmax,j} \)
+	}
+}
+
+\fbox{
+	\parbox{\textwidth}
+	{
+		Utilization
+		\(u = \displaystyle\sum_{j=1}^n \dfrac{t_{Emax,j}}{ min(t_{Dmax,j}, t_{Pmin,j})} \)
+	}
+}
 
 \end{document}
