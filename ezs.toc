@@ -1,11 +1,11 @@
 \contentsline {section}{\numberline {1}placeholder}{2}
-\contentsline {section}{\numberline {2}Zentrale Beschreibgr\IeC {\"o}\IeC {\ss }en}{2}
+\contentsline {section}{\numberline {2}Zentrale Beschreibegr\IeC {\"o}\IeC {\ss }en}{2}
 \contentsline {subsection}{\numberline {2.1}placeholder}{2}
 \contentsline {paragraph}{Defintion}{2}
 \contentsline {subsubsection}{\numberline {2.1.1}Technischer Prozess}{2}
 \contentsline {paragraph}{Beispiel}{2}
 \contentsline {subsubsection}{\numberline {2.1.2}Rechenprozesse}{3}
-\contentsline {subsubsection}{\numberline {2.1.3}Systemsoftware}{3}
+\contentsline {subsubsection}{\numberline {2.1.3}System-software}{3}
 \contentsline {subsection}{\numberline {2.2}Realzeitbedingungen}{3}
 \contentsline {subsubsection}{\numberline {2.2.1}Auslastungsbedingung}{3}
 \contentsline {subsubsection}{\numberline {2.2.2}Rechtzeitigkeitsbedingung}{4}
@@ -18,7 +18,7 @@
 \contentsline {subsubsection}{\numberline {2.3.2}Priorit\IeC {\"a}ten}{6}
 \contentsline {paragraph}{Forderung:}{6}
 \contentsline {subsubsection}{\numberline {2.3.3}Ressourcenmanagment}{7}
-\contentsline {section}{\numberline {3}Systemsoftware}{7}
+\contentsline {section}{\numberline {3}System-software}{7}
 \contentsline {subsection}{\numberline {3.1}Firmware}{7}
 \contentsline {paragraph}{Aufgabe:}{7}
 \contentsline {paragraph}{Auspr\IeC {\"a}gungen:}{7}
@@ -42,7 +42,7 @@
 \contentsline {subsubsection}{\numberline {3.2.5}Multicore Scheduling}{17}
 \contentsline {paragraph}{Aufgabe:}{17}
 \contentsline {paragraph}{L\IeC {\"o}sungen:}{17}
-\contentsline {paragraph}{Der Multi-Core Scheduler wird aktiv:}{19}
+\contentsline {paragraph}{Der Multicore Scheduler wird aktiv:}{19}
 \contentsline {subsubsection}{\numberline {3.2.6}Memory Managment}{19}
 \contentsline {paragraph}{Aufgaben:}{19}
 \contentsline {paragraph}{Konsequenz:}{20}

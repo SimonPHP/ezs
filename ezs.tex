@@ -24,11 +24,11 @@
 \pagebreak
 
 \section[placeholder]{placeholder}
-\section[Zentrale Beschreibgrößen]{Zentrale Beschreibgrößen}
+\section[Zentrale Beschreibegrößen]{Zentrale Beschreibegrößen}
 \subsection{placeholder}
 
 \paragraph[Defintion]{Defintion:}
-Realzeitsystem haben neben Funktionalen Anforderungen auch \textcolor{red}{zeitliche} Anforderungen.
+Realzeitsystem haben neben funktionalen Anforderungen auch \textcolor{red}{zeitliche} Anforderungen.
 
 Ein Realzeitsystem besteht softwaretechnisch aus einer Reihe von Tasks und aus der System-Software.
 
@@ -124,13 +124,13 @@ Phase = minimal Zeitlicher Abstand zwischen zwei \textcolor{red}{unterschiedlich
 	}
 }
 
-- Reaktionszeit \(t_{R,i}\) = Zeit zwischen den Auftreten der RZ-Anforderungen \textcolor{red}{i} und dem Ende der Bearbeitung. \\
+- Reaktionszeit \(t_{R,i}\) = Zeit zwischen dem Auftreten der RZ-Anforderungen \textcolor{red}{i} und dem Ende der Bearbeitung. \\
 
 \(T_{Rmax,i}\) = maximale Reaktionszeit \\
 \(T_{Rmin,i}\) = minimale Reaktionszeit \\
 \(T_{R,i}\) = \textcolor{red}{\(t_{W,i}\)} \(+ t_{E,i}\) wobei \textcolor{red}{ \(t_{W,i}\) } Summe aller Wartezeiten
 
-\subsubsection{Systemsoftware}
+\subsubsection{System-software}
 
 - Latenzzeit \(t_{L_i}\) = Zeit zwischen dem Auftreten einer RZ-Anforderung und dem Start der Bearbeitung
 \textcolor{blue}{
@@ -216,7 +216,7 @@ Für den Realzeitbetrieb muss die tatsächliche Reaktion innerhalb des Zulässig
 \subsubsection{Unterbrechbarkeit}
 
 \paragraph{Forderung:}
-Codesequenzen lassen sich in Teilsequenzen unterteilen, die in Korrekter Reihenfolge aber unabhängig voneinander abgearbeitete werden können. \\
+Codesequenzen lassen sich in Teilsequenzen unterteilen, die in korrekter Reihenfolge aber unabhängig voneinander abgearbeitete werden können. \\
 =$>$ notwendig für den Realzeitbetrieb
 
 \paragraph{Begründung:}
@@ -341,7 +341,7 @@ Der Systemarchitekt muss einfluss auf die Abarbeitungsreihenfolge mehrerer Tasks
 \subsubsection{Ressourcenmanagment}
 --$>$ später
 
-\section[Systemsoftware]{Systemsoftware}
+\section[System-software]{System-software}
 \subsection{Firmware}
 \paragraph{Aufgabe:}
 \begin{description}
@@ -545,7 +545,7 @@ Nachteil:
 
 \subsubsection{Scheduling}
 \paragraph{Def.:}
-Auswahl der Task, die arbeiten/rechnen darf \\
+Auswahl der Task, der arbeiten/rechnen darf \\
 \emph{Content Switch:} Aktivierung der ausgewählten Task \\
 \emph{Statisches Scheduling:} Bedarfsituation ist bekannt \\
 \rotatebox[origin=c]{180}{$\Lsh$} Reihenfolge (Plan) kann im vorhinein festgelegt werden (SPS)\\
@@ -970,9 +970,9 @@ Nutzen: je nach Anwendung\\
 \end{figure}
 
 Der Multicore Scheduler balanziert die last innerhalb einer Scheduling Domain --$>$ sorgt für ausgegelichen Lastverhältnisse.\\
-Die einzelnen Cores verwenden einen Single-Core Scheduler.
+Die einzelnen Cores verwenden einen Singlecore Scheduler.
 Unter Linux ist der name der Rechenprozesse, die für Multicore-Scheduling zuständig sind "\textcolor{magenta}{migration}".\\
-\paragraph{Der Multi-Core Scheduler wird aktiv:}
+\paragraph{Der Multicore Scheduler wird aktiv:}
 \begin{description}
 	\item - exit()
 	\item - pthread\_create(), clone(), fork()
