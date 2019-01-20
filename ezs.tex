@@ -1263,8 +1263,60 @@ Jobs der Priorität 3 (Task C) werden unter Umständen nicht schritthaltend abge
 \emph{RT-Nachweis EDF(Deadline Scheduling)}\\
 \paragraph{1. Schritt:} Anforderungen und Beschreibungsgrößen zusammenstellen\\
 \paragraph{2. Schritt:} Auslastungsbedingung und Utilization überprüfen\\
-\paragraph{3. Aufstellen:} hdh\\
-\paragraph{4. Überprüfung der RT-Bedingung:}asd\\
+Grenze S = 1 $<$- auf Singelcore\\
+\(u = \displaystyle\sum_{j=1}^n \dfrac{t_{Emax,j}}{ min(t_{Dmax,j}, t_{Pmin,j})} \leq 1\) \\
+\paragraph{3. Aufstellen:} \(t_c(I)\) \textcolor{orange}{//Intervall I nicht t!} \\
+
+\( t_c(I) = \displaystyle\sum_{j=1}^n \Big\lfloor \dfrac{I + t_{Pmin,j} - t_{Dmax,j} - t_{Ph,j} }{ t_{Pmin,j} } \Big\rfloor \times t_{Emax,j} \) \\
+
+\paragraph{4. Überprüfung der RT-Bedingung:} \(t_{c}(J) \leq J\) \\
+\(t_{c}(J) \leq J\)\\
+für alle J ein Bereich
+\(0 \leq J \leq < kgV(t_{Pmin,j}) + max(t_{Ph,j}) \)
+
+Hierzu: 
+\begin{description}
+	\item a) die zu berechnenden J bestimmen
+	\item b) für alle zu berechnenden J ist \textcolor{blue}{\(t_{c}(J)\)} auszurechnen.
+	\item c) Bedingungen überprüfen
+	\begin{description}
+		\item - \( t_{Dmin,j} \leq t_{Rmin,j} \)
+		\item - \( t_{c}(J) \leq J \)
+	\end{description}
+\end{description}
+
+\begin{table}[H]
+	\caption{Beispiel(EZN bei EDF):}
+	\begin{tabular}{|l|l|l|l|l|l|l|l|l|l|}
+	\hline
+	RZ-Anf & \(t_{Pmin}\) & \(t_{Dmin}\) & \(t_{Dmax}\) & \(t_{Ph}\) & \(t_{Emin}\) & \(t_{Emax}\) & \(t_{Rmin}\) & \(t_{Rmax}\) & Prio \\ \hline
+	A      & 30ms         & 0ms          & 20ms         & 0ms        & 2ms          & 10ms         & 2ms          &              & 1    \\ \hline
+	B      & 45ms         & 0ms          & 45ms         & 0ms        & 3ms          & 15ms         & 3ms          &              & 2    \\ \hline
+	C      & 60ms         & 0ms          & 60ms         & 10ms       & 4ms          & 15ms         & 4ms          &              & 3    \\ \hline
+	\end{tabular}
+\end{table}
+
+\paragraph{2. Auslastung}: \\
+\(\rho_{max,ges} = \displaystyle\sum_{j=1}^n \dfrac{t_{Emax,j}}{t_{Pmin,j}} \leq c => \dfrac{10ms}{30ms} + \dfrac{15ms}{45ms} + \dfrac{15ms}{60ms} = 0.917 \leq 1\)\\
+
+\paragraph{3. Utilization}: \\
+\(u = \displaystyle\sum_{j=1}^n \dfrac{t_{Emax,j}}{ min(t_{Dmax,j}, t_{Pmin,j})}  =  \dfrac{10ms}{20ms} + \dfrac{15ms}{45ms} + \dfrac{15ms}{60ms} = 1.083 \)\\
+s = 1 (Bei EDF)\\
+weitermachen da u $\leq$ s\\
+
+\paragraph{4. RT-Bedingung prüfen}:\\
+
+\(t_{c}(J) = \displaystyle\sum_{j=1}^n \Big\lfloor \dfrac{J + t_{Pmin,j} - t_{Dmax,j} - t_{Ph,j} }{ t_{Pmin,j} } \Big\rfloor \times t_{Emax,j}\) \\
+\(= \Big\lfloor \dfrac{J + 30ms - 20ms - 0ms }{ 30ms } \Big\rfloor \times 10ms\) \textcolor{blue}{A} \\
+\(= \Big\lfloor \dfrac{J + 45ms - 45ms - 0ms }{ 45ms } \Big\rfloor \times 15ms\) \textcolor{blue}{B} \\
+\(= \Big\lfloor \dfrac{J + 60ms - 60ms - 10ms }{ 60ms } \Big\rfloor \times 15ms\) \textcolor{blue}{C} \\
+\(= \Big\lfloor \dfrac{J + 10ms }{ 30ms } \Big\rfloor \times 10ms + \Big\lfloor \dfrac{J}{ 45ms } \Big\rfloor \times 15ms + \Big\lfloor \dfrac{J - 10ms }{ 60ms } \Big\rfloor \times 15ms\)\\
+
+\paragraph{5.}:\\
+
+\( 0 \leq J kgV(30ms, 45ms, 60ms) + max(0ms, 0ms, 10ms) \) \\
+\( 0 \leq J \leq 180ms + 10ms\)\\
+\( 0 \leq J 190ms\)\\
 
 
 

@@ -62,5 +62,9 @@
 \contentsline {paragraph}{3. Schritt:}{24}
 \contentsline {paragraph}{1. Schritt:}{27}
 \contentsline {paragraph}{2. Schritt:}{27}
-\contentsline {paragraph}{3. Aufstellen:}{27}
+\contentsline {paragraph}{3. Aufstellen:}{28}
 \contentsline {paragraph}{4. \IeC {\"U}berpr\IeC {\"u}fung der RT-Bedingung:}{28}
+\contentsline {paragraph}{2. Auslastung}{28}
+\contentsline {paragraph}{3. Utilization}{28}
+\contentsline {paragraph}{4. RT-Bedingung pr\IeC {\"u}fen}{29}
+\contentsline {paragraph}{5.}{29}
