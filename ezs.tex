@@ -27,7 +27,7 @@
 \section[Zentrale Beschreibegrößen]{Zentrale Beschreibegrößen}
 \subsection{placeholder}
 
-\paragraph[Defintion]{Defintion:}
+\paragraph[Definition]{Definition:}
 Realzeitsystem haben neben funktionalen Anforderungen auch \textcolor{red}{zeitliche} Anforderungen.
 
 Ein Realzeitsystem besteht softwaretechnisch aus einer Reihe von Tasks und aus der System-Software.
@@ -187,7 +187,7 @@ Phase = minimal Zeitlicher Abstand zwischen zwei \textcolor{red}{unterschiedlich
 }
 
 \subsubsection{Rechtzeitigkeitsbedingung}
-Für den Realzeitbetrieb muss die tatsächliche Reaktion innerhalb des Zulässigen Reaktionsbereiches erfolt sein.
+Für den Realzeitbetrieb muss die tatsächliche Reaktion innerhalb des Zulässigen Reaktionsbereiches erfolgt sein.
 
 \begin{figure}[ht]
 	\centering
@@ -347,7 +347,7 @@ Der Systemarchitekt muss einfluss auf die Abarbeitungsreihenfolge mehrerer Tasks
 \begin{description}
 	\item - Basisinitialisierung der Hardware
 	\item - Diagnose
-	\item - Betriebinitialisierung
+	\item - Betriebsinitialisierung
 	\item - Laden + Aktivieren von Codes
 	\item - Runtime Services
 \end{description}
@@ -360,7 +360,7 @@ Der Systemarchitekt muss einfluss auf die Abarbeitungsreihenfolge mehrerer Tasks
 \end{description}
 
 \subsection{RT-OS}
-\paragraph{Defintion.:}
+\paragraph{Definition.:}
 Bezeichnung für alle Software-Komponenten, die
 \begin{description}
 	\item - die Ausführung der Applikationen und
@@ -369,7 +369,7 @@ Bezeichnung für alle Software-Komponenten, die
 \paragraph{Anforderungen:}
 \begin{description}
 	\item - Zeitverhalten
-	\item - Ressourcenverbraucht
+	\item - Ressourcenverbrauch
 	\item - Zuverlässigkeit und Stabilität
 	\item - Sicherheit
 	\item - Flexibilität und Kompatibilität
@@ -409,7 +409,7 @@ ret = write(fd, "Hello World", 13);\\
 \paragraph{Aufgabe:}
 Verwaltung der Ressource CPU
 \begin{description}
-	\item --$>$ quasi parallele Verarbeitung auf einzelenen CPU-Kernen
+	\item --$>$ quasi parallele Verarbeitung auf einzelnen CPU-Kernen
 	\item --$>$ real parallele Verarbeitung auf Multicore-Rechnern
 \end{description}
 Scheduling = Auswahl des als nächsten zu bearbeiten Jobs \\
@@ -428,13 +428,13 @@ Realisierung: Modifikation der Rücksprungadresse auf dem Stack beim Interrupt.
 	\begin{minipage}[t]{6cm}
 	\vspace{0pt}
 	\begin{description}
-	\item 1. \textcolor{blue}{Code an der im IP stehenen Address wird abgearbeitete}
+	\item 1. \textcolor{blue}{Code an der im IP stehenen Adresse wird abgearbeitete}
 	\item 2. \textcolor{blue}{IR tritt auf}
 		\begin{description}
 			\item - Inhalt vom IP wird auf den Stack gelegt
-			\item - IP wird auf die Addresse der ISR gelegt (CPU arbeitet die ISR ab)
+			\item - IP wird auf die Adressee der ISR gelegt (CPU arbeitet die ISR ab)
 		\end{description}
-	\item 3. \textcolor{blue}{Bei } \textcolor{red}{iret} \textcolor{blue}{ wird die auf dem stack hinterlegte Addresse zurück auf den IP geladen}
+	\item 3. \textcolor{blue}{Bei } \textcolor{red}{iret} \textcolor{blue}{ wird die auf dem stack hinterlegte Adressee zurück auf den IP geladen}
 	\item --$>$ normale Verarbeitung wird fortgesetzt
 	\end{description}
 	\end{minipage}
@@ -540,7 +540,7 @@ Vorteil:
 \end{description}
 Nachteil:
 \begin{description}
-	\item - Safety: Ein amok laufender Thread bringt die gesammte Threadgruppe in einen inkonsistenten Zustand.
+	\item - Safety: Ein amok laufender Thread bringt die gesamte Threadgruppe in einen inkonsistenten Zustand.
 \end{description}
 
 \subsubsection{Scheduling}
@@ -549,7 +549,7 @@ Auswahl der Task, der arbeiten/rechnen darf \\
 \emph{Content Switch:} Aktivierung der ausgewählten Task \\
 \emph{Statisches Scheduling:} Bedarfsituation ist bekannt \\
 \rotatebox[origin=c]{180}{$\Lsh$} Reihenfolge (Plan) kann im vorhinein festgelegt werden (SPS)\\
-\emph{Dynamisches Scheduling:} Die Auswahl erfolgt auf Basis der aktullen Bedarfsituation (z.B. PC, Smartphone)\\
+\emph{Dynamisches Scheduling:} Die Auswahl erfolgt auf Basis der aktuellen Bedarfsituation (z.B. PC, Smartphone)\\
 \emph{Singlecore Scheduling:} Quasiparallele Verarbeitung auf einem CPU-Kern\\
 \emph{Multicore Scheduling:} Realparallele Verarbeitung auf mehrerern CPU-Kernen\\
 \rotatebox[origin=c]{180}{$\Lsh$} Verteilungsaufgabe
@@ -803,7 +803,7 @@ Auswahl der Task, der arbeiten/rechnen darf \\
 
 		}
 		\end{tikzpicture}
-		\textcolor{blue}{g} tirtt erneut auf obwohl \textcolor{blue}{g} noch nicht fertig abgearbeitet ist.
+		\textcolor{blue}{g} tritt erneut auf obwohl \textcolor{blue}{g} noch nicht fertig abgearbeitet ist.
 		Die letzten 5ms vom alten \textcolor{blue}{g} werden erst bei 45ms abgearbeitet.
 	}
 }
@@ -916,7 +916,7 @@ Konzept der Scheduling Klassen:
 
 \subsubsection{Multicore Scheduling}
 \paragraph{Aufgabe:}
-Verteilung der Jobs auf die CPU-Kerne, so dass unsere Zeitbedingunen eingehalten werden \emph{und} das System (eneregie-)effizent arbeitet.
+Verteilung der Jobs auf die CPU-Kerne, so dass unsere Zeitbedingunen eingehalten werden \emph{und} das System (eneregie-)effizient arbeitet.
 
 \paragraph{Lösungen:}
 \begin{description}
@@ -969,7 +969,7 @@ Nutzen: je nach Anwendung\\
 	\includegraphics[scale=0.6]{umlet/scheduling_domain.png}
 \end{figure}
 
-Der Multicore Scheduler balanziert die last innerhalb einer Scheduling Domain --$>$ sorgt für ausgegelichen Lastverhältnisse.\\
+Der Multicore Scheduler balanziert die last innerhalb einer Scheduling Domain --$>$ sorgt für ausgeglichene Lastverhältnisse.\\
 Die einzelnen Cores verwenden einen Singlecore Scheduler.
 Unter Linux ist der name der Rechenprozesse, die für Multicore-Scheduling zuständig sind "\textcolor{magenta}{migration}".\\
 \paragraph{Der Multicore Scheduler wird aktiv:}
@@ -1083,13 +1083,13 @@ Applikationen sollen keine Details der Hardware (z.B. Adressen, Bitmaskierungen,
 \end{figure}
 
 \emph{Filesysteme}
-Strukturen zur Ablage von Daten auf Hintergrundspeicher in hierarchisch organisierten Datein.\\
+Strukturen zur Ablage von Daten auf Hintergrundspeicher in hierarchisch organisierten Dateien.\\
 \paragraph{Beispiel:} Ext4, NTFS, FAT32, exFat, JFFS2, ISO9660, ...\\
 
 \paragraph{Merkmale:}
 \begin{description}
 	\item - maximale FileSystem-Größe
-	\item - Anzahl Datein
+	\item - Anzahl Dateien
 	\item - maximale Datei Größe
 	\item - Attribute
 	\item - Zugriffszeit
@@ -1109,7 +1109,7 @@ Strukturen zur Ablage von Daten auf Hintergrundspeicher in hierarchisch organisi
 			\item - \textcolor{blue}{\(t_{P,i}\)} = Prozesszeit, zeitlicher Abstand zwischen zwei RT-Anforderungen \textcolor{blue}{i} \fbox{ \textcolor{blue}{\(t_{Pmin,i}\)}}
 			\item - \textcolor{blue}{\(t_{Dmin,i}\)} = minimal zulässige Reaktionszeit
 			\item - \textcolor{blue}{\(t_{Dmax,i}\)} = maximal zulässige Reaktionszeit
-			\item - \textcolor{blue}{\(t_{Ph,i}\)} = Phase, zeitlicher Abstand zwischen zwei \textcolor{red}{unterschiedlicher} Ereignise
+			\item - \textcolor{blue}{\(t_{Ph,i}\)} = Phase, zeitlicher Abstand zwischen zwei \textcolor{red}{unterschiedlicher} Ereignisse
 		\end{description}
 	}
 }
@@ -1220,7 +1220,7 @@ Abbruch: \textcolor{blue}{ \( t_{p}^{(l)} == t_{p}^{(l+1)} \) }  \textcolor{mage
 
 \(t_{Emin}\) = \(t_{Rmin}\)\\
 
-Berechenung der Utilization u:
+Berechnung der Utilization u:
 
 \(u = \displaystyle\sum_{j=1}^n \dfrac{t_{Emax,j}}{ min(t_{Dmax,j}, t_{Pmin,j})}  =  \dfrac{10ms}{20ms} + \dfrac{15ms}{45ms} + \dfrac{15ms}{60ms} = 1.083 \)\\
 \(\rho_{max,ges} = \displaystyle\sum_{j=1}^n \dfrac{t_{Emax,j}}{t_{Pmin,j}} \leq c => \dfrac{10ms}{30ms} + \dfrac{15ms}{45ms} + \dfrac{15ms}{60ms} = 0.917 \leq 1\)\\
@@ -1278,7 +1278,7 @@ Grenze S = 1 $<$- auf Singelcore\\
 \paragraph{4. Überprüfung der RT-Bedingung:} \(t_{c}(J) \leq J\) \\
 \(t_{c}(J) \leq J\)\\
 für alle J ein Bereich
-\(0 \leq J \leq < kgV(t_{Pmin,j}) + max(t_{Ph,j}) \)
+\(0 \leq J \leq kgV(t_{Pmin,j}) + max(t_{Ph,j}) \)
 
 Hierzu: 
 \begin{description}
@@ -1322,7 +1322,7 @@ weitermachen da u $\leq$ s\\
 
 \( 0 \leq J kgV(30ms, 45ms, 60ms) + max(0ms, 0ms, 10ms) \) \\
 \( 0 \leq J \leq 180ms + 10ms\)\\
-\( 0 \leq J 190ms\)\\
+\( 0 \leq J \leq 190ms\)\\
 
 
 
