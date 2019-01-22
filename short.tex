@@ -5,16 +5,35 @@
 \usepackage{amsmath}
 \usepackage{amssymb}
 \usepackage{calc}
+\usepackage{float}
 
 \title{EZS}
 \author{Simon Krücken}
 
 \begin{document}
     
-%\begin{titlepage}
+\begin{titlepage}
 %    \maketitle
-%\end{titlepage}
-%\tableofcontents
+\end{titlepage}
+\tableofcontents
+
+\section{Unterlagenfreier Teil}
+
+1. Definieren Sie den Begriff Realzeitsystem\\
+Ein Realzeitsystem muss neben den funktionalen Anforderungen auch noch zeitliche Anforderungen genügen.\\
+
+2. Wie lauten die Beiden Realzeitbedingungen (genaue Angabe)?\\
+
+\begin{itemize}
+	\item 1. Realzeitbedingung:\\ \(\rho_{max,ges} = \displaystyle\sum_{j=1}^n \dfrac{t_{Emax,i}}{t_{Pin,i}} \leq c\) mit c = Anzahl Rechnerkerne
+	\item 2. Realzeitbedingung: Für alle Rechenzeitanforderungen i muss gelten:\\ \( t_{Dmin,j} \leq t_{Rmin,j} \leq t_{Rmax,j} \leq t_{Dmax,j} \)
+\end{itemize}
+
+3. Erläutern Sie anhand der Nutzen-Funktion mithilfe einer genauen Skizze den Unterschied zwischen harter und weicher Realzeit!\\
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.3]{umlet/harte_weiche_realzeit.png}
+\end{figure}
 
 \section[Formeln]{Formeln}
 
