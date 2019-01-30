@@ -6,6 +6,7 @@
 \usepackage{amssymb}
 \usepackage{calc}
 \usepackage{float}
+\usepackage{listings}
 
 \title{EZS}
 \author{Simon Krücken}
@@ -17,25 +18,12 @@
 \end{titlepage}
 \tableofcontents
 
-\section{Unterlagenfreier Teil}
-
-1. Definieren Sie den Begriff Realzeitsystem\\
-Ein Realzeitsystem muss neben den funktionalen Anforderungen auch noch zeitliche Anforderungen genügen.\\
-
-2. Wie lauten die Beiden Realzeitbedingungen (genaue Angabe)?\\
-
+\section[Formeln]{Formeln}
+Realzeitbedingungen:\\
 \begin{itemize}
 	\item 1. Realzeitbedingung:\\ \(\rho_{max,ges} = \displaystyle\sum_{j=1}^n \dfrac{t_{Emax,i}}{t_{Pin,i}} \leq c\) mit c = Anzahl Rechnerkerne
 	\item 2. Realzeitbedingung: Für alle Rechenzeitanforderungen i muss gelten:\\ \( t_{Dmin,j} \leq t_{Rmin,j} \leq t_{Rmax,j} \leq t_{Dmax,j} \)
 \end{itemize}
-
-3. Erläutern Sie anhand der Nutzen-Funktion mithilfe einer genauen Skizze den Unterschied zwischen harter und weicher Realzeit!\\
-\begin{figure}[H]
-	\centering
-	\includegraphics[scale=0.3]{umlet/harte_weiche_realzeit.png}
-\end{figure}
-
-\section[Formeln]{Formeln}
 
 \(t_{Pmin,i} = minimal\) =$>$ \(t_{max,i} = \dfrac{1}{ t_{Pmin,i} }\) \\
 \(t_{Pmax,i} = maximal\) \textcolor{gray}{$<$= uninteressant} \\
@@ -142,5 +130,79 @@ Ein Realzeitsystem muss neben den funktionalen Anforderungen auch noch zeitliche
 		\(u = \displaystyle\sum_{j=1}^n \dfrac{t_{Emax,j}}{ min(t_{Dmax,j}, t_{Pmin,j})} \)
 	}
 }
+
+\section[Zeiten zeug]{Zeiten zeug}
+\begin{lstlisting}
+struct timespec {
+        time_t   tv_sec;        /* seconds */
+        long     tv_nsec;       /* nanoseconds */
+};
+\end{lstlisting}
+
+\begin{itemize}
+	\item CLOCK\_REALTIME\\ Systemweite realzeit Uhr. Diese Uhr zu setzten erfordert Root Rechte.
+	\item CLOCK\_MONOTONIC\\ Kann nicht gesetzt werden. Gibt die vergangene Zeit ab einem unbestimmten Zeitpunkt an.
+\end{itemize}
+
+\begin{lstlisting}
+#include <time.h>
+main(int argc, char **argv)
+{
+	struct timespec start, end;
+	clock_gettime(CLOCK_MONOTONIC, &start);	/* mark start time */
+	sleep(1);	/* do stuff */
+	clock_gettime(CLOCK_MONOTONIC, &end);	/* mark the end time */
+	int diff = diff (end.tv_sec - start.tv_sec) + end.tv_nsec - start.tv_nsec;
+}
+\end{lstlisting}
+
+\begin{itemize}
+	\item Absolute Zeit: Zeit die überall gleich schnell ist
+	\item Realtive Zeit: Zeit ist abhängig von der Geschwindigkeit und der Gravitation.
+\end{itemize}
+
+\begin{lstlisting}
+#include <sys/time.h>
+
+void timeradd(struct timeval *a, struct timeval *b, struct timeval *res);
+
+void timersub(struct timeval *a, struct timeval *b,	struct timeval *res);
+
+void timerclear(struct timeval *tvp);
+
+int timerisset(struct timeval *tvp);
+
+int timercmp(struct timeval *a, struct timeval *b, CMP);
+\end{lstlisting}
+
+
+\section[Petrie Netze]{Petrie Netze}
+
+\section[Datenfluss Diagram]{Datenfluss Diagram}
+
+\section[Struktugram]{Struktugram}
+
+\section[Zeug]{Zeug}
+\subsection{Harte und Weiche Realzeit}
+Harte und weiche Realzeit/Echtzeit\\
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.3]{umlet/harte_weiche_realzeit.png}
+\end{figure}
+\subsection{Bits}
+Oberen 4 Bits von \textcolor{blue}{1010}1101 in Dezimal. \\
+\textcolor{blue}{1010} allein stehen durch 4 mal bitshift rechts =$>$ 1010 = 0xA = 10
+
+Bitsmaskieren:
+\begin{itemize}
+	\item AND 1010 \& 0111 = 0010
+	\item OR 0101 $|$ 0011 = 0111
+	\item XOR 0110 $\wedge$ 1011 = 1101
+\end{itemize}
+
+
+
+
+
 
 \end{document}
