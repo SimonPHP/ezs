@@ -23,9 +23,7 @@
 \tableofcontents
 \pagebreak
 
-\section[placeholder]{placeholder}
 \section[Zentrale Beschreibegrößen]{Zentrale Beschreibegrößen}
-\subsection{placeholder}
 
 \paragraph[Definition]{Definition:}
 Realzeitsystem haben neben funktionalen Anforderungen auch \textcolor{red}{zeitliche} Anforderungen.
@@ -1094,5 +1092,93 @@ Strukturen zur Ablage von Daten auf Hintergrundspeicher in hierarchisch organisi
 	\item - Attribute
 	\item - Zugriffszeit
 \end{description}
+
+\section[RT-Architekturen]{RT-Architekturen}
+\subsection{RT ohne Systemsoftware \textcolor{blue}{(deeplyembeeded system)}}
+\begin{itemize}
+	\item Keine Systemsoftawre (evtl. Monitorsoftware)
+	\item Single Threaded
+	\item Parallelität über ISR (Interrupt Service Routine)
+	\item Preiswerte HW -$>$ 8Bit/16Bit
+	\item Programmierung: Assembler/C
+\end{itemize}
+
+\subsection{RT basierend auf Standard OS (Linux)}
+\begin{itemize}
+	\item Linux, Windows -$>$ Embedded Variante
+	\item Vorteil: Bekannte Schnittstellen für Entwickler und Anwender
+	\item Nachteil: (Kosten), HW-Anforderungen, 32Bit+MMU, Sicherheit/Safety, RT-Fähigkeit, Haltedauer
+\end{itemize}
+
+\subsection{Threaded Interrupts}
+\begin{itemize}
+	\item Idee: "Alles ist ein Thread" =$>$ auch ISR
+	\item Vorteil: 
+	\begin{itemize}
+		\item Priorisierung aller Komponenten
+		\item ISR kann schlafen
+		\item übersichtliche Systemarchitektur	
+	\end{itemize}
+	\item Nachteil: häufige Kontextwechsel
+	\item Funktionsweise: Kurzse ISR weckt den Schlafenden "Interrupt"-Thread auf
+\end{itemize}
+
+\subsection{Application to Kernel}
+\begin{itemize}
+	\item Zeitliche Teile der Applikation werden in den Kernel verlagert \\ 
+	\rotatebox[origin=c]{180}{$\Lsh$} Kernelmodul, Gerätetreiber
+	\item Nachteil: Verquickung von System und Anwendung \\ 
+	\rotatebox[origin=c]{180}{$\Lsh$} \textcolor{red}{hochgradigk unsauber!} \\
+	\rotatebox[origin=c]{180}{$\Lsh$} Securtiy \\
+	\rotatebox[origin=c]{180}{$\Lsh$} Safety
+	\item Vorteil: gute RT-Eigentschaften
+	\item \textcolor{green}{Beispiel: Raspberry Pi als digitales Speicheroszilloskop}
+\end{itemize} 
+
+\subsection{Multikernel Architektur}
+Basistechnologie Virtualisierung mehrerer Betriebsysteme auf 1 Hardware.\\
+\fbox{
+	RTOS + Standard-OS
+}\\
+
+RT-Hypervisor mit Standard-OS als IdleTask
+\begin{figure}[ht]
+	\centering
+	\includegraphics[scale=0.5]{umlet/multikernel_architektur.png}
+\end{figure}
+
+\begin{itemize}
+	\item Vorteil: gute RT-Eigentschaften
+	\item Nachteil: 2 Systeme + Hypervisor \\ Einarbeitungs und Pflegeaufwand
+\end{itemize}
+
+\subsection{RT-Architektur auf Multicore-Basis}
+Einzelne CPU-Kerne eines Multicore-Rechners werden exklusiv für Realzeitaufgaben reserviert.\\
+Technologien: - Affinität \\
+\textcolor{white}{Technologien: }- Isolation\\
+
+Affinität: Jobs werden fest Prozessorkernen zugeordnet. \\
+Isolation: Der CPU-kern steht nur den zugeordneten Threads zur Verfügung\\
+
+Jobs werden von Hand auf die Kerne verteilt (partitionieren)\\
+\rotatebox[origin=c]{180}{$\Lsh$} Jeder Kern wird als Singelcore-System betrachtet\\
+\textcolor{white}{\rotatebox[origin=c]{180}{$\Lsh$}} \rotatebox[origin=c]{180}{$\Lsh$} für jeden Kern ist ein RT-Nachweis durchzuführen
+
+\subsection{RTOS}
+z.B. VxWorks, Free RTOS\\
+\begin{itemize}
+	\item Vorteil:
+	\begin{itemize}
+		\item sehr schlank (z.B. 16kByte)
+		\item häufig Zertifiziert (Safety)
+		\item gute RT-Eigentschaften
+	\end{itemize}
+	\item Nachteil:
+	\begin{itemize}
+		\item proprietär
+		\item evtl. teuer (VxWorks)
+	\end{itemize}
+\end{itemize}
+
 
 \end{document}
